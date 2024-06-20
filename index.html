@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>G-SHOTI</title>
+		<link rel="stylesheet" href="index.css">
+</head>
+<body>
+		<h1 style="font-size: 30px">G-SHOTI</h1>
+	
+		<div class="div-element">
+		<p id="typewriter-text"></p>
+		</div>
+		
+			<div id="video-container">
+		<video id="video" controls autoplay></video>
+	</div>
+		
+		<button class="nextButton">NEXT</button><br>
+		
+		<script>
+const text = `Welcome to Gnimous Shoti Website, We appreciated your feelings.`;
+  let index = 0;
+
+  function typeWriter() {
+    document.getElementById("typewriter-text").innerHTML += text.charAt(index);
+    index++;
+
+    if (index < text.length) {
+      setTimeout(typeWriter, 50);
+    }
+  }
+
+  typeWriter();
+		</script>
+		<script src="index.js"></script>
+<div class="divv-container">
+<p class="p" id="type1writer">
+		Hello Fellow user, Thank you for visiting my Shoti Website, This is just a site with a shoti with girl if you don`t know what is shoti...Read On The bottom.
+</p>
+<br>
+
+		<p class="p" id="type2writer">
+				Shoti is basically a videos showing the horny pretty girl Note that don`t share this video to anyone on facebook it will may or cause some report from others and you will report as a video inappropriate videos.
+		</p>
+</div>
+
+<div class="footer">
+         <p>| ©️ Geoff All Rights Reserved 2024 |</p>
+         <p>Time: <span id="time"></span>
+         </p>
+         <p>Ping: <span id="ping"></span>
+         </p>
+      </div>
+<script>
+function measurePing() {
+  var xhr = new XMLHttpRequest();
+  var startTime, endTime;
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      endTime = Date.now();
+      var pingTime = endTime - startTime;
+      document.getElementById("ping").textContent = pingTime + " ms";
+    }
+  };
+  xhr.open("GET", location.href + "?t=" + new Date().getTime());
+  startTime = Date.now();
+  xhr.send();
+}
+setInterval(measurePing, 1000);
+
+function updateTime() {
+  const now = new Date();
+  const options = {
+    timeZone: 'Asia/Manila',
+    hour12: true,
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+  };
+  const formattedTime = now.toLocaleString('en-US', options);
+  document.getElementById('time').textContent = formattedTime;
+}
+updateTime();
+setInterval(updateTime, 1000);
+</script>
+	<script>
+		async function getRandomVideo() {
+			try {
+				const url = 'https://shoti-server-5b293365cb713b.replit.app/api/v1/get';
+				const rawResponse = await fetch(url, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ apikey: "$shoti-1hg4gifgnlfdmeslom8" })
+				});
+				const content = await rawResponse.json();
+				document.getElementById('video').src = content.data.url;
+			} catch (e) {
+				console.error("Error fetching Shoti video", e);
+			}
+		}
+
+		getRandomVideo();
+
+		document.getElementById('nextButton').addEventListener('click', () => {
+			getRandomVideo();
+		});
+	</script>
+</body>
+</html>
